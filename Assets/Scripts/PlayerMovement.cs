@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody PlayerRigidbody;
     public GameObject CoinCollected;
     private int cointCount;
+    private int coinCount2;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +37,22 @@ public class PlayerMovement : MonoBehaviour
             CoinCollected.GetComponent<Text>().text = "Coins: " + cointCount;
             Destroy(other.gameObject);
         }
-        if (cointCount == 4)
+        if (other.gameObject.tag == "Coin2")
         {
-            SceneManager.LoadScene("GameWinScene");
+            coinCount2++;
+            CoinCollected.GetComponent<Text>().text = "Coins: " + coinCount2;
+            Destroy(other.gameObject);
+        }
+        if (cointCount == 4)
+        {           
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
+        if (coinCount2 == 5)
+        {
+            SceneManager.LoadScene(3);
+
         }
     }
-}
+    }
+
